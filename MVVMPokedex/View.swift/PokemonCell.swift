@@ -11,7 +11,7 @@ import UIKit
 class PokemonCell: UITableViewCell {
     
     static let CellIdentifer = "PokemonCell"
-    static let CellHeight: CGFloat = 80
+    static let CellHeight: CGFloat = 100
     
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -26,7 +26,7 @@ class PokemonCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(viewModel: PokedexViewModel) {
+    func configure(viewModel: PokemonViewModel) {
         iconImage.image = viewModel.iconImage
         nameLabel.text = viewModel.nameTxt
         heightLabel.text = viewModel.heightTxt

@@ -1,5 +1,5 @@
 //
-//  PokedexViewModel.swift
+//  PokemonViewModel.swift
 //  MVVMPokedex
 //
 //  Created by Kam Hei Siu on 27/7/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PokedexViewModel {
+protocol PokemonViewModel {
     var iconImage: UIImage? { get }
     var nameTxt: String { get }
     var heightTxt: String { get }

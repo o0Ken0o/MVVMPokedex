@@ -13,7 +13,7 @@ class PokedexViewController: UIViewController {
     @IBOutlet weak var noOfPokemonsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: [PokedexViewModel] = [] {
+    var viewModel: [PokemonViewModel] = [] {
         didSet {
             reloadData()
         }

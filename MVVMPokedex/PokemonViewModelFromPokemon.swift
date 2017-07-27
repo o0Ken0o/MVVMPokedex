@@ -1,5 +1,5 @@
 //
-//  PokedexViewModelFromPokemon.swift
+//  PokemonViewModelFromPokemon.swift
 //  MVVMPokedex
 //
 //  Created by Kam Hei Siu on 27/7/2017.
@@ -12,7 +12,7 @@ enum Type: String {
     case Normal, Fire, Water, Electric, Grass, Flying, Psychic
 }
 
-struct PokedexViewModelFromPokemon: PokedexViewModel {
+struct PokemonViewModelFromPokemon: PokemonViewModel {
     let pokemon: Pokemon
     
     let iconImage: UIImage?
@@ -28,7 +28,7 @@ struct PokedexViewModelFromPokemon: PokedexViewModel {
         self.nameTxt = "--o0 \(pokemon.name) 0o--"
         self.heightTxt = "\(pokemon.height) m"
         self.weightTxt = "\(pokemon.weight) kg"
-        self.bgColor = PokedexViewModelFromPokemon.getBgColor(type: pokemon.type)
+        self.bgColor = PokemonViewModelFromPokemon.getBgColor(type: pokemon.type)
     }
     
     fileprivate static func getBgColor(type: String) -> UIColor {
