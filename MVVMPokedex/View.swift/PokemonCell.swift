@@ -11,6 +11,12 @@ import UIKit
 class PokemonCell: UITableViewCell {
     
     static let CellIdentifer = "PokemonCell"
+    static let CellHeight: CGFloat = 80
+    
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
