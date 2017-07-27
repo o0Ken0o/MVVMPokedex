@@ -20,13 +20,18 @@ class PokemonCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func configure(viewModel: PokedexViewModel) {
+        iconImage.image = viewModel.iconImage
+        nameLabel.text = viewModel.nameTxt
+        heightLabel.text = viewModel.heightTxt
+        weightLabel.text = viewModel.weightTxt
+        self.backgroundColor = viewModel.bgColor
     }
     
 }
