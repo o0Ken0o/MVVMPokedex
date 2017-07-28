@@ -9,19 +9,24 @@
 import Foundation
 
 struct PokedexViewModelFromPokemons: PokedexViewModel {
-    let pokemonsModel: [Pokemon]
+    var pokemonsModel: [Pokemon]
     
-    let pokemons: [PokemonViewModel]
+    var pokemons: Dynamic<[PokemonViewModel]>
     
-    let pokemonsCountTxt: String
+    var pokemonsCountTxt: Dynamic<String>
     
     init(pokemons: [Pokemon]) {
         self.pokemonsModel = pokemons
-        self.pokemons = pokemons.map{ PokemonViewModelFromPokemon(pokemon: $0) }
-        self.pokemonsCountTxt = "\(self.pokemons.count) pokemons"
+        self.pokemons = Dynamic(pokemons.map{ PokemonViewModelFromPokemon(pokemon: $0) })
+        self.pokemonsCountTxt = Dynamic("\(self.pokemons.value.count) pokemons")
     }
     
-    func didSelect(pokemon: PokemonViewModel) {
-        print("didSelect \(pokemon.nameTxt)")
+    mutating func didSelect(indexPath: IndexPath) {
+        let pokemonModel = pokemonsModel[indexPath.row]
+        let pokemonViewModel = pokemons.value[indexPath.row]
+        
+        pokemonsModel.append(pokemonModel)
+        pokemons.value.append(pokemonViewModel)
+        self.pokemonsCountTxt.value = "\(self.pokemons.value.count) pokemons"
     }
 }

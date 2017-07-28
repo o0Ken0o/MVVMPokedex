@@ -13,11 +13,7 @@ class PokedexViewController: UIViewController {
     @IBOutlet weak var noOfPokemonsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: PokedexViewModel? {
-        didSet {
-            reloadData()
-        }
-    }
+    var viewModel: PokedexViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +30,8 @@ class PokedexViewController: UIViewController {
             return
         }
         
-        tableView.reloadData()
-        noOfPokemonsLabel.text = viewModel?.pokemonsCountTxt
+        viewModel?.pokemons.bindAndFire({ [unowned self] (pokemonViewModels) in self.tableView.reloadData() })
+        viewModel?.pokemonsCountTxt.bindAndFire({ [unowned self] in self.noOfPokemonsLabel.text = $0 })
     }
 }
 
@@ -48,11 +44,11 @@ extension PokedexViewController: UITableViewDataSource {
         
         guard let viewModel = viewModel else { return 0 }
         
-        return viewModel.pokemons.count
+        return viewModel.pokemons.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let pokemonViewModel = viewModel?.pokemons[indexPath.row] else { return PokemonCell() }
+        guard let pokemonViewModel = viewModel?.pokemons.value[indexPath.row] else { return PokemonCell() }
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.CellIdentifer, for: indexPath) as? PokemonCell {
             cell.configure(viewModel: pokemonViewModel)
@@ -73,7 +69,7 @@ extension PokedexViewController: UITableViewDataSource {
 
 extension PokedexViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let pokemonSelected = viewModel?.pokemons[indexPath.row] else { return }
-        viewModel?.didSelect(pokemon: pokemonSelected)
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel?.didSelect(indexPath: indexPath)
     }
 }

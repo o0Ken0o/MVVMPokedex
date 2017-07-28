@@ -9,8 +9,8 @@
 import Foundation
 
 protocol PokedexViewModel {
-    var pokemons: [PokemonViewModel] { get }
-    var pokemonsCountTxt: String { get }
+    var pokemons: Dynamic<[PokemonViewModel]> { set get }
+    var pokemonsCountTxt: Dynamic<String> { set get }
     
-    func didSelect(pokemon: PokemonViewModel)
+    mutating func didSelect(indexPath: IndexPath)
 }
