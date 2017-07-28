@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "PokedexViewController" {
             if let destinationVC = segue.destination as? PokedexViewController {
-                destinationVC.viewModel = pokemons.map{ PokemonViewModelFromPokemon(pokemon: $0) }
+                destinationVC.viewModel = PokedexViewModelFromPokemons(pokemons: pokemons)
             }
         }
     }

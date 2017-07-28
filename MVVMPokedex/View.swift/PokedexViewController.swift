@@ -13,7 +13,7 @@ class PokedexViewController: UIViewController {
     @IBOutlet weak var noOfPokemonsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: [PokemonViewModel] = [] {
+    var viewModel: PokedexViewModel? {
         didSet {
             reloadData()
         }
@@ -21,6 +21,7 @@ class PokedexViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "PokemonCell", bundle: nil), forCellReuseIdentifier: PokemonCell.CellIdentifer)
         tableView.dataSource = self
         tableView.delegate = self
@@ -43,19 +44,22 @@ extension PokedexViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.count
+        
+        guard let viewModel = viewModel else { return 0 }
+        
+        return viewModel.pokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let pokemon = viewModel[indexPath.row]
+        guard let pokemonViewModel = viewModel?.pokemons[indexPath.row] else { return PokemonCell() }
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.CellIdentifer, for: indexPath) as? PokemonCell {
-            cell.configure(viewModel: pokemon)
+            cell.configure(viewModel: pokemonViewModel)
             return cell
         }
         
         let cell = PokemonCell()
-        cell.configure(viewModel: pokemon)
+        cell.configure(viewModel: pokemonViewModel)
         
         return cell
         
