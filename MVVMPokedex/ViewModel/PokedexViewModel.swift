@@ -10,4 +10,7 @@ import Foundation
 
 protocol PokedexViewModel {
     var pokemons: [PokemonViewModel] { get }
+    var pokemonsCountTxt: String { get }
+    
+    func didSelect(pokemon: PokemonViewModel)
 }

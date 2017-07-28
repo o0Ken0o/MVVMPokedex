@@ -35,6 +35,7 @@ class PokedexViewController: UIViewController {
         }
         
         tableView.reloadData()
+        noOfPokemonsLabel.text = viewModel?.pokemonsCountTxt
     }
 }
 
@@ -71,5 +72,8 @@ extension PokedexViewController: UITableViewDataSource {
 }
 
 extension PokedexViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let pokemonSelected = viewModel?.pokemons[indexPath.row] else { return }
+        viewModel?.didSelect(pokemon: pokemonSelected)
+    }
 }

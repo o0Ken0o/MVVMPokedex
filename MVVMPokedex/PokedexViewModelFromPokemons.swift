@@ -11,12 +11,17 @@ import Foundation
 struct PokedexViewModelFromPokemons: PokedexViewModel {
     let pokemonsModel: [Pokemon]
     
-    // MARK: Protocol PokedexViewModel
-    
     let pokemons: [PokemonViewModel]
+    
+    let pokemonsCountTxt: String
     
     init(pokemons: [Pokemon]) {
         self.pokemonsModel = pokemons
         self.pokemons = pokemons.map{ PokemonViewModelFromPokemon(pokemon: $0) }
+        self.pokemonsCountTxt = "\(self.pokemons.count) pokemons"
+    }
+    
+    func didSelect(pokemon: PokemonViewModel) {
+        print("didSelect \(pokemon.nameTxt)")
     }
 }
